@@ -52,6 +52,7 @@ class TechList extends Component {
               onDelete={() => this.hadleDelete(tech)}
             />
           ))}
+          <TechItem />
         </ul>
         <input
           type="text"
