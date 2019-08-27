@@ -5,8 +5,36 @@ import TechItem from "./TechItem";
 class TechList extends Component {
   state = {
     newTech: "",
-    techs: ["Node.js", "ReactJS", "React Native"]
+    techs: []
   };
+
+  /**
+   * Run on component load event.
+   * On load event read techs and put it on the screen.
+   */
+  componentDidMount() {
+    const techs = localStorage.getItem("techs");
+    if (techs) {
+      this.setState({ techs: JSON.parse(techs) });
+    }
+  }
+
+  /**
+   * Run every time that prop and states are changed.
+   * If prev state are diff then actual state, save to local storage.
+   */
+  componentDidUpdate(prevProps, prevState) {
+    // this.props
+    // this.state
+    if (prevState.techs !== this.state.techs) {
+      localStorage.setItem("techs", JSON.stringify(this.state.techs));
+    }
+  }
+
+  /**
+   * Run on after component are destroyed.
+   */
+  componentWillUnmount() {}
 
   /**
    * Get all type on screen and save on newTech.
@@ -52,7 +80,6 @@ class TechList extends Component {
               onDelete={() => this.hadleDelete(tech)}
             />
           ))}
-          <TechItem />
         </ul>
         <input
           type="text"
