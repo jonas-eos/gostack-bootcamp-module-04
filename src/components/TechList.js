@@ -27,15 +27,28 @@ class TechList extends Component {
   };
 
   /**
+   * Delete a tech inside techs.
+   */
+  hadleDelete = __tech => {
+    this.setState({
+      techs: this.state.techs.filter(__techIndex => __techIndex !== __tech)
+    });
+    console.log(__tech);
+  };
+  /**
    * Render all content on webpage.
    */
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <h1>{this.state.newTech}</h1>
         <ul>
           {this.state.techs.map(tech => (
-            <li key={tech}>{tech}</li>
+            <li key={tech}>
+              {tech}
+              <button type="button" onClick={() => this.hadleDelete(tech)}>
+                Remove
+              </button>
+            </li>
           ))}
         </ul>
         <input
